@@ -1,10 +1,9 @@
-package com.example.demo.Servicios;
+package com.example.demo.Services;
 
 
 
 import com.example.demo.CustomerStatus;
-import com.example.demo.Entidades.Customer;
-import com.example.demo.Repository.CustomerRepository;
+import com.example.demo.Modelos.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +74,9 @@ public class CustomerService {
         return arrayList;
     }
 
+
+
+
     /**
      * Finds all Customer's that match given filter and limits the resultset.
      *
@@ -140,7 +142,7 @@ public class CustomerService {
     public synchronized void save(Customer entry) {
         if (entry == null) {
             LOGGER.log(Level.SEVERE,
-                    "null.");
+                    "null");
             return;
         }
         if (entry.getId() == null) {
@@ -159,7 +161,7 @@ public class CustomerService {
      */
     public void ensureTestData() {
         if (findAll().isEmpty()) {
-            final String[] names = new String[] { "Jean Marte", "Stanley De Moya" , "Carlos Camacho" };
+            final String[] names = new String[] { "Jhon Diaz", "Leonardo Castro" };
             Random r = new Random(0);
             for (String name : names) {
                 String[] split = name.split(" ");

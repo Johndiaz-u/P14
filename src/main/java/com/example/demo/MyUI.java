@@ -2,9 +2,9 @@ package com.example.demo;
 
 
 
-import com.example.demo.Entidades.Customer;
-import com.example.demo.Repository.CustomerRepository;
-import com.example.demo.Servicios.CustomerService;
+import com.example.demo.Modelos.Customer;
+
+import com.example.demo.Services.CustomerService;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
@@ -12,25 +12,34 @@ import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.List;
 
 
+
 @SpringUI
-@Theme("valo")
+@Theme("valo") //Tema Plantilla por defecto.
 public class MyUI extends UI{
+
+
 
     private CustomerService service = CustomerService.getInstance();
     private Grid<Customer> grid = new Grid<>(Customer.class);
     private TextField filterText = new TextField();
     private CustomerForm form = new CustomerForm(this);
 
+    public void updateList() {
+        List<Customer> customers = service.findAll(filterText.getValue());
+        grid.setItems(customers);
+    }
+
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
 
-        filterText.setPlaceholder("Filtrar...");
+        filterText.setPlaceholder("Buscar..");
         filterText.addValueChangeListener(e -> updateList());
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
 
@@ -59,7 +68,7 @@ public class MyUI extends UI{
 
         layout.addComponents(toolbar, main);
 
-        // fetch list of Customers from service and assign it to Grid
+
         updateList();
 
         setContent(layout);
@@ -75,28 +84,7 @@ public class MyUI extends UI{
         });
     }
 
-    public void updateList() {
-        List<Customer> customers = service.findAll(filterText.getValue());
-        grid.setItems(customers);
-    }
-
-//    @Autowired
-//    public MyUI(CustomerRepository repo,CustomerEditor editor)
-//    {
-//        this.editor=editor;
-//        this.repo=repo;
-//        this.grid=new Grid<>(Customer.class);
-//        this.filter=new TextField();
-//        this.addNewButton=new Button("New Customer", FontAwesome.PLUS);
-//
-//    }
 
 
-//    private void listCustomers(String filterText){
-//        if(org.springframework.util.StringUtils.isEmpty(filterText)){
-//            grid.setItems(repo.findAll());
-//        }else {
-//            grid.setItems(repo.findByLastNameStartsWithIgnoreCase(filterText));
-//        }
-//    }
+
 }

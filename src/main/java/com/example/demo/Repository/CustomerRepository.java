@@ -2,7 +2,7 @@ package com.example.demo.Repository;
 
 
 
-import com.example.demo.Entidades.Customer;
+import com.example.demo.Modelos.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

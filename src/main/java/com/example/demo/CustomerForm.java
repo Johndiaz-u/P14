@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.Entidades.Customer;
-import com.example.demo.Servicios.CustomerService;
+import com.example.demo.Modelos.Customer;
+import com.example.demo.Services.CustomerService;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.*;
